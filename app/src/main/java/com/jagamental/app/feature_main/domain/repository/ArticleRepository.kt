@@ -5,4 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface ArticleRepository {
     fun getArticles() : Flow<List<Article>>
+    fun getArticle(id: Int) : Article
 }

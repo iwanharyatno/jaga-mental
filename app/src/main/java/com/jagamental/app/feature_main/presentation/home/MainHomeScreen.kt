@@ -44,18 +44,16 @@ import androidx.navigation.compose.rememberNavController
 import com.jagamental.app.feature_main.domain.model.Article
 import com.jagamental.app.feature_main.domain.model.Community
 import com.jagamental.app.feature_main.domain.model.Counselor
-import com.jagamental.app.feature_main.domain.model.Filter
 import com.jagamental.app.feature_main.presentation.home.components.ArticleList
 import com.jagamental.app.feature_main.presentation.home.components.ChipFilterBand
 import com.jagamental.app.feature_main.presentation.home.components.CommunityList
 import com.jagamental.app.feature_main.presentation.home.components.CounselorItem
 import com.jagamental.app.feature_main.presentation.home.components.SectionHeader
+import com.jagamental.app.feature_main.util.NavRoute
 import com.jagamental.app.ui.theme.JagaMentalTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @Composable
 fun MainHomeScreen(
@@ -204,14 +202,19 @@ private fun MainHomeScreenPure(
             Column {
                 SectionHeader(
                     title = "Berita Terbaru",
-                    onAllClick = { /*TODO*/
-                        CoroutineScope(Dispatchers.Default).launch {
-                            snackbarHostState.showSnackbar("Not yet implemented")
-                        }
+                    onAllClick = {
+                        tabController.navigate(NavRoute.ArticleList.route)
                     }
                 )
                 Spacer(modifier = Modifier.height(8.dp))
-                ArticleList(articles = state.articles)
+                ArticleList(
+                    articles = state.articles,
+                    onItemClick = { article ->
+                        tabController.navigate(
+                            NavRoute.ArticleDetail.route + "?articleId=${article.id}"
+                        )
+                    }
+                )
             }
         }
         item(
@@ -285,7 +288,7 @@ fun MainHomePreview() {
                 tabController = rememberNavController(),
                 state = MainHomeState(
                     articles = listOf(
-                        Article("", "")
+                        Article(1, "", "")
                     ),
                     counselors = listOf(
                         Counselor(1, "Random person with cool name", "", 4.8, true),

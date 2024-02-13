@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId = "com.jagamental.app"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
@@ -78,6 +78,9 @@ dependencies {
 
     // Coil
     implementation("io.coil-kt:coil-compose:2.4.0")
+
+    // YCharts
+    implementation("co.yml:ycharts:2.1.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

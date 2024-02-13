@@ -1,7 +1,5 @@
 package com.jagamental.app.feature_main.presentation
 
-import androidx.compose.animation.EnterTransition
-import androidx.compose.animation.ExitTransition
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -32,10 +30,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import com.jagamental.app.feature_main.presentation.article_detail.ArticleDetailScreen
+import com.jagamental.app.feature_main.presentation.articles.ArticleScreen
 import com.jagamental.app.feature_main.presentation.chat.ChatScreen
 import com.jagamental.app.feature_main.presentation.home.MainHomeScreen
 import com.jagamental.app.feature_main.presentation.music.MusicScreen
@@ -176,6 +178,32 @@ fun MainScreen(
 
                 composable(route = NavRoute.Report.route) {
                     ReportScreen(
+                        navController = navHostController,
+                        tabController = navHostController,
+                        snackbarHostState = snackBarHostState,
+                    )
+                }
+
+                composable(route = NavRoute.ArticleList.route) {
+                    ArticleScreen(
+                        navController = navHostController,
+                        tabController = navHostController,
+                        snackbarHostState = snackBarHostState,
+                    )
+                }
+
+                composable(
+                    route = NavRoute.ArticleDetail.route + "?articleId={articleId}",
+                    arguments = listOf(
+                        navArgument(
+                            name = "articleId"
+                        ) {
+                            type = NavType.IntType
+                            defaultValue = -1
+                        }
+                    )
+                ) {
+                    ArticleDetailScreen(
                         navController = navHostController,
                         tabController = navHostController,
                         snackbarHostState = snackBarHostState,

@@ -1,9 +1,8 @@
-package com.jagamental.app.feature_main.presentation.home.components
+package com.jagamental.app.feature_main.presentation.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -17,13 +16,13 @@ import com.jagamental.app.feature_main.domain.model.Article
 @Composable
 fun ArticleItem(
     article: Article,
-    onClick: () -> Unit
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     AsyncImage(
         model = article.imageUrl,
         contentDescription = article.title,
-        modifier = Modifier
-            .width(240.dp)
+        modifier = modifier
             .clip(shape = RoundedCornerShape(18.dp))
             .aspectRatio(16f / 9)
             .background(color = Color.LightGray)

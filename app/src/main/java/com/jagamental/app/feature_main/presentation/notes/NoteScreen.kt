@@ -8,14 +8,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.DatePicker
-import androidx.compose.material3.DatePickerState
-import androidx.compose.material3.DisplayMode
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -29,7 +24,6 @@ import com.jagamental.app.feature_main.domain.model.Note
 import com.jagamental.app.feature_main.presentation.notes.components.NewNoteButton
 import com.jagamental.app.feature_main.presentation.notes.components.NotesList
 import com.jagamental.app.ui.theme.JagaMentalTheme
-import java.util.Calendar
 
 @Composable
 fun NoteScreen(
@@ -46,7 +40,6 @@ fun NoteScreen(
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteScreenPure(
     navController: NavController,
@@ -68,10 +61,9 @@ fun NoteScreenPure(
                 fontWeight = FontWeight.Bold
             )
         }
-        DatePicker(
-            state = state.datePickerState
-        )
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(18.dp))
+        // TODO
+        Spacer(modifier = Modifier.height(18.dp))
         NewNoteButton(
             onClick = {}
         )
@@ -83,7 +75,6 @@ fun NoteScreenPure(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
 @Composable
 fun NoteScreenPreview() {
@@ -112,7 +103,6 @@ fun NoteScreenPreview() {
                             title = "Judul Catatan Hari Ini"
                         ),
                     ),
-                    datePickerState = rememberDatePickerState()
                 )
             )
         }

@@ -2,7 +2,6 @@ package com.jagamental.app.feature_main.presentation.report
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,6 +27,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import co.yml.charts.common.model.PlotType
+import co.yml.charts.ui.piechart.charts.DonutPieChart
+import co.yml.charts.ui.piechart.models.PieChartConfig
+import co.yml.charts.ui.piechart.models.PieChartData
 import com.jagamental.app.R
 import com.jagamental.app.feature_main.presentation.report.components.ReportCard
 import com.jagamental.app.ui.theme.BlueDepressed
@@ -70,7 +74,7 @@ fun ReportScreenPure(
             )
         }
         Spacer(modifier = Modifier.height(32.dp))
-        Box(
+        DonutPieChart(
             modifier = Modifier
                 .weight(0.5f)
                 .shadow(
@@ -79,6 +83,21 @@ fun ReportScreenPure(
                 )
                 .background(color = MaterialTheme.colorScheme.background)
                 .fillMaxWidth()
+                .padding(12.dp),
+            pieChartData = PieChartData(
+                slices = listOf(
+                    PieChartData.Slice("HP", 15f, Color(0xFF5F0A87)),
+                    PieChartData.Slice("Dell", 30f, Color(0xFF20BF55)),
+                    PieChartData.Slice("Lenovo", 40f,  Color(0xFFEC9F05)),
+                    PieChartData.Slice("Asus", 10f, Color(0xFFF53844))
+                ),
+                plotType = PlotType.Donut
+            ),
+            pieChartConfig = PieChartConfig(
+                strokeWidth = 120f,
+                activeSliceAlpha = .9f,
+                isAnimationEnable = true
+            )
         )
         Spacer(modifier = Modifier.height(32.dp))
         LazyVerticalGrid(
